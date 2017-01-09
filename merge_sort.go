@@ -46,7 +46,6 @@ func MergeSort(input []int) []int {
 	return Merge(a, b)
 }
 
-
 func main() {
 	list := []int{4, 7, 3, 1, 5, 8, 2, 6}
 	fmt.Println(MergeSort(list))
