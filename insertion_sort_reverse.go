@@ -8,7 +8,7 @@ func InsertionSortReverse(input []int) []int {
 		i := j - 1
 		for i >= 0 && input[i] < key {
 			input[i+1] = input[i]
-			i = i -1
+			i = i - 1
 		}
 		input[i+1] = key
 
@@ -17,6 +17,6 @@ func InsertionSortReverse(input []int) []int {
 }
 
 func main() {
-	list := []int{4,7,3,1,5,8,2,6}
+	list := []int{4, 7, 3, 1, 5, 8, 2, 6}
 	fmt.Println(InsertionSortReverse(list))
 }
