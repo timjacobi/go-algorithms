@@ -10,9 +10,7 @@ func SelectionSort(input []int) []int {
 				minIndex = j
 			}
 		}
-		temp := input[i]
-		input[i] = input[minIndex]
-		input[minIndex] = temp
+		input[i], input[minIndex] = input[minIndex], input[i]
 	}
 	return input
 }
