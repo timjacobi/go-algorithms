@@ -35,15 +35,14 @@ func Merge(a, b []int) []int {
 }
 
 func MergeSort(input []int) []int {
-	var a, b []int
-	middle := len(input) / 2
-	if(len(input) > 2) {
-		a = MergeSort(input[0:middle])
-		b = MergeSort(input[middle:len(input)])
-	} else {
-		a = input[0:1]
-		b = input[1:len(input)]
+	if len(input) == 1 {
+		return input
 	}
+
+	middle := len(input) / 2
+	a := MergeSort(input[0:middle])
+	b := MergeSort(input[middle:len(input)])
+
 	return Merge(a, b)
 }
 
