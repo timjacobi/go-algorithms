@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func BinarySearchInner(input []int, value, start, end int) int {
-	if end-start == 0 {
+	if start == end {
 		return start
 	} else {
 		middle := ((end - start) / 2) + start
