@@ -27,12 +27,12 @@ func MaximumCrossingSubarray(input []int, low, mid, high int) (int, int, int) {
 	return maxLeft, maxRight, leftSum + rightSum
 }
 
-func MaximumSubarrayInner(input []int, low, high int) (int, int, int){
+func MaximumSubarrayInner(input []int, low, high int) (int, int, int) {
 	if high == low {
 		return low, high, input[low]
 	}
 
-	mid := (low+high)/2
+	mid := (low + high) / 2
 	leftLow, leftHigh, leftSum := MaximumSubarrayInner(input, low, mid)
 	rightLow, rightHigh, rightSum := MaximumSubarrayInner(input, mid+1, high)
 	crossLow, crossHigh, crossSum := MaximumCrossingSubarray(input, low, mid, high)
@@ -46,11 +46,11 @@ func MaximumSubarrayInner(input []int, low, high int) (int, int, int){
 	}
 }
 
-func MaximumSubarray(input []int) (int, int, int){
+func MaximumSubarray(input []int) (int, int, int) {
 	return MaximumSubarrayInner(input, 0, len(input)-1)
 }
 
-func main(){
+func main() {
 	list := []int{111, 4, 6, -3, 8, -2, 2, -11}
 	low, high, sum := MaximumSubarray(list)
 	fmt.Printf("The maximum subarray %v with a sum of %v starts at index %v and ends at index %v \n", list[low:high+1], sum, low, high)
