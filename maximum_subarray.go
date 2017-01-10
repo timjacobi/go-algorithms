@@ -2,10 +2,6 @@ package main
 
 import "fmt"
 
-const MaxUint = ^uint(0)
-const MaxInt = int(MaxUint >> 1)
-const MinInt = -MaxInt - 1
-
 func MaximumCrossingSubarray(input []int, low, mid, high int) (int, int, int) {
 	leftSum := MinInt
 	sum := 0
