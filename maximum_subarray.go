@@ -53,5 +53,5 @@ func MaximumSubarray(input []int) (int, int, int){
 func main(){
 	list := []int{111, 4, 6, -3, 8, -2, 2, -11}
 	low, high, sum := MaximumSubarray(list)
-	fmt.Printf("The maximum subarray %v with a sum of %v starts at index %v and ends at index %v", list[low:high+1], sum, low, high)
+	fmt.Printf("The maximum subarray %v with a sum of %v starts at index %v and ends at index %v \n", list[low:high+1], sum, low, high)
 }
