@@ -7,7 +7,7 @@ import (
 func Partition(input []int, p, r int) int {
 	i := p - 1
 	for j := p; j < r; j++ {
-		if input[j] < input[r] {
+		if input[j] <= input[r] {
 			input[i+1], input[j] = input[j], input[i+1]
 			i = i + 1
 		}
