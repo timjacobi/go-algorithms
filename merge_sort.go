@@ -2,6 +2,13 @@ package main
 
 import "fmt"
 
+// Merges given inputs in ascending order
+//
+// Iterates over given inputs and adds the smaller value
+// at current index to result until one of the inputs
+// is exhausted.
+// Then iterates of rest of the input that wasn't exhausted
+// and adds remaining elements to the result.
 func Merge(a, b []int) []int {
 	result := make([]int, len(a)+len(b))
 	idxa := 0
@@ -34,6 +41,11 @@ func Merge(a, b []int) []int {
 	return result
 }
 
+// Sorts given input
+//
+// Splits the input in two halves and then recurses
+// on them until their size is 1. Then merges the
+// two halves using Merge and returns the result.
 func MergeSort(input []int) []int {
 	if len(input) == 1 {
 		return input
