@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+// Calculates the maximum subarray for given input
+//
+// Calculates the sum of all subarrays by iterating over
+// given input using two indexes. Returns the boundaries
+// and sum of maximum subarray.
 func MaximumSubarrayBrutforce(input []int) (int, int, int) {
 	var left, right int
 	sum := MinInt
