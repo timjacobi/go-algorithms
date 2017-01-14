@@ -2,6 +2,13 @@ package main
 
 import "fmt"
 
+// Sorts given input
+//
+// Iterates over elements 1 - n and shifts
+// all elements left of current element
+// that are larger than the current element one
+// index to the right. Inserts current element
+// at index the last element was moved from.
 func InsertionSort(input []int) {
 	for j := 1; j < len(input); j++ {
 		key := input[j]
