@@ -2,11 +2,24 @@ package main
 
 import "fmt"
 
+// Searches for maximum subarray that crosses the midpoint of given input
+// and boundaries
+//
+// First iterates from the middle down to the start of the given input and
+// continuously calculates the sum of the elements. Sets the maximum left index
+// for the highest sum found.
+//
+// Then iterates from the middle up to the end of the given input and
+// continuously calculates the sum of the elements. Sets the maximum right index
+// for the highest sum found.
+//
+// Returns the highest left index and highest right index as well as the sum of
+// both sums calculated
 func MaximumCrossingSubarray(input []int, low, mid, high int) (int, int, int) {
 	leftSum := MinInt
 	sum := 0
-	maxLeft := high
-	maxRight := low
+	maxLeft := mid
+	maxRight := mid
 	for i := mid; i >= low; i-- {
 		sum = sum + input[i]
 		if sum > leftSum {
@@ -27,6 +40,16 @@ func MaximumCrossingSubarray(input []int, low, mid, high int) (int, int, int) {
 	return maxLeft, maxRight, leftSum + rightSum
 }
 
+// Searches for the maximum subarray for given input and boundaries
+//
+// If boundary indexes have the same value it returns the indexes and
+// the value in given input at the index
+//
+// Otherwise recursively searches for maximum subarrays in left half and
+// right half of input and for a maximum subarray that crosses the mid point
+// of given input
+//
+// Returns the boundary indexes and sum of the subarray with the largest sum
 func MaximumSubarrayInner(input []int, low, high int) (int, int, int) {
 	if high == low {
 		return low, high, input[low]
@@ -46,6 +69,7 @@ func MaximumSubarrayInner(input []int, low, high int) (int, int, int) {
 	}
 }
 
+// Calculates the boundaries of input and kicks off the maximum subarray search
 func MaximumSubarray(input []int) (int, int, int) {
 	return MaximumSubarrayInner(input, 0, len(input)-1)
 }
