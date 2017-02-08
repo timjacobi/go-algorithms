@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	Parent *Node
@@ -91,6 +93,26 @@ func TreeWalkNonRecursive(root *Node) {
 			stack = append([]*Node{node.Right}, stack...)
 		}
 	}
+}
+
+// Calculates the height of a tree
+func TreeHeight(root *Node) int {
+	if root == nil {
+		return -1
+	}
+
+	var maxChildHeight int
+
+	heightLeft := TreeHeight(root.Left)
+	heightRight := TreeHeight(root.Right)
+
+	if heightLeft > heightRight {
+		maxChildHeight = heightLeft
+	} else {
+		maxChildHeight = heightRight
+	}
+
+	return 1 + maxChildHeight
 }
 
 // Non-recursive pre-order tree walk with constant space
@@ -263,6 +285,78 @@ func TreePredecessor(root *Node) int {
 	return p.Key
 }
 
+func TreeInsert(root *Node, node *Node) {
+	var y *Node
+	x := root
+
+	for x != nil {
+		y = x
+		if node.Key < x.Key {
+			x = x.Left
+		} else {
+			x = x.Right
+		}
+	}
+
+	node.Parent = y
+
+	if node.Key < y.Key {
+		y.Left = node
+	} else {
+		y.Right = node
+	}
+
+}
+
+func TreeInsertRecursive(root *Node, node *Node) *Node {
+	if root == nil {
+		return node
+	}
+	if node.Key < root.Key {
+		root.Left = TreeInsertRecursive(root.Left, node)
+		node.Parent = root.Left
+	} else {
+		root.Right = TreeInsertRecursive(root.Right, node)
+		node.Parent = root.Right
+	}
+
+	return root
+}
+
+func TreeDelete(root *Node, key int) *Node {
+	if root == nil {
+		return nil
+	} else if key < root.Key {
+		root.Left = TreeDelete(root.Left, key)
+	} else if key > root.Key {
+		root.Right = TreeDelete(root.Right, key)
+	} else {
+		// We found the node to delete, let's handle the cases
+		if root.Left == nil && root.Right == nil {
+			// Case 1: Node has no children
+			// => Delete node
+			root = nil
+		} else if root.Left == nil {
+			// Case 2a: Node has right child
+			// => Replace node with its right child
+			root = root.Right
+		} else if root.Right == nil {
+			// Case 2b: Node has left child
+			// => Replace node with its left child
+			root = root.Left
+		} else {
+			// Case 3: Node has two children
+			// => Find minimum key in right subtree,
+			// set the node's key to the minimum key,
+			// delete node with minimum key
+			min := TreeMinimum(root.Right)
+			root.Key = min
+			root.Right = TreeDelete(root.Right, min)
+		}
+	}
+	return root
+}
+
 func main() {
 	// Set up the following tree
 	//
@@ -303,8 +397,19 @@ func main() {
 	fmt.Printf("%+v\n", *TreeSearch(root, 20))
 	fmt.Println()
 
+	fmt.Printf("Tree height is: %v \n", TreeHeight(root))
 	fmt.Printf("Tree minimum is: %v \n", TreeMinimum(root))
 	fmt.Printf("Tree maximum is: %v \n", TreeMaximum(root))
 	fmt.Printf("Successor of key 8 is: %v \n", TreeSuccessor(TreeSearch(root, 8)))
 	fmt.Printf("Predecessor of key 15 is: %v \n", TreePredecessor(TreeSearch(root, 15)))
+
+	fmt.Print("Adding node with key 13, resulting tree is: ")
+	TreeInsertRecursive(root, NewNode(13, nil, nil))
+	InOrderTreeWalk(root)
+	fmt.Println()
+
+
+	fmt.Print("Deleting node with key 15, resulting tree is: ")
+	TreeDelete(root, 15)
+	InOrderTreeWalk(root)
 }
