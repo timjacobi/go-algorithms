@@ -17,7 +17,7 @@ func (q *Queue) Enqueue(value int) {
 
 func (q *Queue) Dequeue() (int, error) {
 	if q.Size() == 0 {
-		return 0, errors.New("No more elements")
+		return 0, errors.New("Queue is empty!")
 	}
 	value := (*q)[0]
 	*q = (*q)[1:]
