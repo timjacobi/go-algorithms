@@ -44,12 +44,6 @@ func IsPalindrome(a string) bool {
 	return false
 }
 
-func IntToEnglish(n int) string {
-	var result string
-
-
-}
-
 func main(){
 	fmt.Println(IsSubstring("aaaaabb", "abb"))
 	fmt.Println(IsSubstring("abcde", "bce"))
